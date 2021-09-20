@@ -309,7 +309,7 @@ const abi = [
 function App() {
     const [account, setaccount] = useState('');
 
-    const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+    const contractAddress = "0x4ed7c70F96B99c776995fB64377f0d4aB3B0e1C1";
     const provider = new ethers.providers.Web3Provider(ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(contractAddress, abi, signer);
@@ -336,7 +336,7 @@ function App() {
         const signer = provider.getSigner();
         const contract = new ethers.Contract(contractAddress, abi, signer);
         // const transaction = await contract.setPixel(110, 120, 0, 0, 0);
-        const transaction = await contract["setPixel(uint16, uint16, uint8, uint8, uint8)"](110, 120, 0, 0, 0);
+        const transaction = await contract["setPixel(uint16,uint16,uint8,uint8,uint8)"](110, 120, 1, 0, 0);
         await transaction.wait();
     };
 
