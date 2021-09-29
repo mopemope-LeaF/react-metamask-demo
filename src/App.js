@@ -73,7 +73,7 @@ function App() {
 
         const limit_api = new OneInchLimitApi();
 
-        const [limitOrder, orderHash, orderSignature] = await limit_api.sign(56, "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c", "0x111111111117dc0aa78b770fa6a738034120c302", "100000", "10000", 1000);
+        const [limitOrder, orderHash, orderSignature] = await limit_api.sign(56, "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c", "0x111111111117dc0aa78b770fa6a738034120c302", "100000", "10000", 120);
         const response = await limit_api.send(56, limitOrder, orderHash, orderSignature);
         console.log(response);
     };
