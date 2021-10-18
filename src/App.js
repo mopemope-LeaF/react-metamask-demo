@@ -39,7 +39,6 @@ function App() {
 
     const  swapaction = async () => {
         let new1 = new OneInchLimitApi();
-        let new2 = new OneInchApi();
         // const {chainId} = await provider.getNetwork();
         // const eth_address ="0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee";
         //
@@ -59,13 +58,11 @@ function App() {
 
         const fromToken = '0x6b175474e89094c44da98b954eedeac495271d0f';
         const toToken = '0xdac17f958d2ee523a2206206994597c13d831ec7';
-        // const toToken = '0x6b175474e89094c44da98b954eedeac495271d0f';
-        // const fromToken = '0x6b175474e89094c44da98b954eedeac495271d0f';
-        const fromAmount = '90000000000000000000';
-        const toAmount = '110000000';
+        // const fromAmount = '900000000000000000';
+        const toAmount = '11000000';
         // const fromToken = '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee';
 
-        // const fromAmount = '20000000000000000';
+        const fromAmount = '100000000000000000000';
         // const toAmount = '100000000';
         const seconds = 7200;
 
@@ -75,7 +72,7 @@ function App() {
         //     params: [params],
         // });
         // console.log(txHash);
-        new1.sign(
+        const res = await new1.sign(
                 chainId,
                 fromToken,
                 toToken,
@@ -83,18 +80,17 @@ function App() {
                 toAmount,
                 seconds
             )
-            .then((res) => {
-                console.log('======sign', res);
-                const [limitOrder, orderHash, orderSignature] = res;
-                new1.send(
-                    chainId,
-                    limitOrder,
-                    orderHash,
-                    orderSignature
-                ).then((res) => {
-                    console.log('======send', res);
-                })
-            });
+        console.log('======sign', res);
+        const [limitOrder, orderHash, orderSignature] = res;
+        const result = await new1.send(
+            chainId,
+            limitOrder,
+            orderHash,
+            orderSignature,
+            fromAmount,
+            toAmount
+        )
+        console.log('=======send', result)
         // const params = {
         //     from: '0x3CD18131FC5633705D6722B5D1fa88255BAF5d1F',
         //     to: '0x11111112542d85b3ef69ae05771c2dccff4faa26',
